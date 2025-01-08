@@ -23,7 +23,7 @@ A simple web-based application to manage student attendance. This system allows 
 
 ## Screenshot
 
-![Screenshot of Attendance Management System](https://via.placeholder.com/800x600?text=Attendance+Management+System)
+![Screenshot of Attendance Management System](https://raw.githubusercontent.com/diptamandebnath/attendance/refs/heads/main/Screenshot.png)
 
 ## Installation
 
