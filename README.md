@@ -21,10 +21,6 @@ A simple web-based application to manage student attendance. This system allows 
 4. **Responsive Design**
    - Works seamlessly across desktop and mobile devices.
 
-## Screenshot
-
-![Screenshot of Attendance Management System](https://raw.githubusercontent.com/diptamandebnath/attendance/refs/heads/main/Screenshot.png)
-
 ## Installation
 
 1. Clone the repository or download the files.
