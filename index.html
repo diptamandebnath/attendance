@@ -1,194 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Student or Event Attendance Management System">
-    <title>Attendance Management System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('https://static.vecteezy.com/system/resources/previews/029/288/802/non_2x/a-group-of-excited-students-stand-in-front-of-a-colorful-chalkboard-ready-for-a-new-school-year-free-photo.jpg') no-repeat center center/cover;
-        }
-        h1 {
-            text-align: center;
-            color: #fbff00;
-            margin-top: 30px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background:white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            color: #000000;
-        }
-        input[type="text"], input[type="number"] {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #007bff;
-            border-radius: 8px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f8f9fa;
-        }
-        footer{
-            color: #ffffff;
-            text-align: center;
-            font-weight: bold;
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        
-        }
-        a{
-            color: blue;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Management Pro</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 32px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* INPUTS */
+input {
+    width: 30%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* BUTTONS */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.add-btn { background: #00c853; color: white; }
+.add-btn:hover { background: #009624; }
+
+.present { background: #00e676; }
+.absent { background: #ff5252; }
+
+.delete { background: #ff1744; color: white; }
+
+.export { background: #2979ff; color: white; margin-top: 10px; }
+
+/* TABLE */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #2a5298;
+    color: white;
+}
+
+/* SEARCH */
+.search-box {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.card {
+    flex: 1;
+    margin: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+}
+</style>
 </head>
+
 <body>
-    <h1>Attendance Management System</h1>
-    <div class="container">
-        <h2>Add Student</h2>
-        <input type="text" id="studentName" placeholder="Enter student name">
-        <input type="number" id="studentRollNo" placeholder="Enter roll number">
-        <input type="date" id="attendanceDate" placeholder="Select date">
-        <button onclick="addStudent()">Add Student</button>
 
-        <h2>Attendance List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Roll No</th>
-                    <th>Student Name</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="attendanceTable">
-                <!-- Dynamic Rows Here -->
-            </tbody>
-        </table>
+<h1>🎓 Attendance Management Pro</h1>
 
-        <button onclick="exportToExcel()">Export to Excel</button>
-        <button onclick="exportToPDF()">Export to PDF</button>
+<div class="container">
+
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="number" id="roll" placeholder="Roll No">
+    <input type="date" id="date">
+    <button class="add-btn" onclick="addStudent()">Add</button>
+
+    <input type="text" id="search" class="search-box" placeholder="Search student..." onkeyup="render()">
+
+    <div class="stats">
+        <div class="card">Present: <span id="presentCount">0</span></div>
+        <div class="card">Absent: <span id="absentCount">0</span></div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script>
-        const students = [];
+    <table>
+        <thead>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="table"></tbody>
+    </table>
 
-        function addStudent() {
-            const studentName = document.getElementById('studentName').value.trim();
-            const studentRollNo = document.getElementById('studentRollNo').value.trim();
-            const attendanceDate = document.getElementById('attendanceDate').value;
+    <button class="export" onclick="exportCSV()">Export CSV</button>
+</div>
 
-            if (studentName === '' || studentRollNo === '' || attendanceDate === '') {
-                alert('Please enter all details.');
-                return;
-            }
+<script>
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
-            students.push({ rollNo: studentRollNo, name: studentName, date: attendanceDate, status: 'Absent' });
-            document.getElementById('studentName').value = '';
-            document.getElementById('studentRollNo').value = '';
-            document.getElementById('attendanceDate').value = '';
-            renderTable();
-        }
+function saveData() {
+    localStorage.setItem("students", JSON.stringify(students));
+}
 
-        function toggleAttendance(index) {
-            students[index].status = students[index].status === 'Present' ? 'Absent' : 'Present';
-            renderTable();
-        }
+function addStudent() {
+    let name = document.getElementById("name").value;
+    let roll = document.getElementById("roll").value;
+    let date = document.getElementById("date").value;
 
-        function renderTable() {
-            const tableBody = document.getElementById('attendanceTable');
-            tableBody.innerHTML = '';
-            students.forEach((student, index) => {
-                const row = document.createElement('tr');
+    if (!name || !roll || !date) {
+        alert("Fill all fields");
+        return;
+    }
 
-                const rollNoCell = document.createElement('td');
-                rollNoCell.textContent = student.rollNo;
-                row.appendChild(rollNoCell);
+    students.push({ name, roll, date, status: "Absent" });
+    saveData();
+    render();
 
-                const nameCell = document.createElement('td');
-                nameCell.textContent = student.name;
-                row.appendChild(nameCell);
+    document.getElementById("name").value = "";
+    document.getElementById("roll").value = "";
+    document.getElementById("date").value = "";
+}
 
-                const dateCell = document.createElement('td');
-                dateCell.textContent = student.date;
-                row.appendChild(dateCell);
+function toggle(index) {
+    students[index].status =
+        students[index].status === "Present" ? "Absent" : "Present";
+    saveData();
+    render();
+}
 
-                const statusCell = document.createElement('td');
-                statusCell.textContent = student.status;
-                row.appendChild(statusCell);
+function deleteStudent(index) {
+    students.splice(index, 1);
+    saveData();
+    render();
+}
 
-                const actionCell = document.createElement('td');
-                const toggleButton = document.createElement('button');
-                toggleButton.textContent = student.status === 'Present' ? 'Mark Absent' : 'Mark Present';
-                toggleButton.onclick = () => toggleAttendance(index);
-                actionCell.appendChild(toggleButton);
-                row.appendChild(actionCell);
+function render() {
+    let table = document.getElementById("table");
+    let search = document.getElementById("search").value.toLowerCase();
 
-                tableBody.appendChild(row);
-            });
-        }
+    table.innerHTML = "";
 
-        function exportToExcel() {
-            let tableContent = "Roll No,Student Name,Date,Status\n";
-            students.forEach(student => {
-                tableContent += `${student.rollNo},${student.name},${student.date},${student.status}\n`;
-            });
+    let present = 0;
+    let absent = 0;
 
-            const blob = new Blob([tableContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'attendance.csv';
-            link.click();
-        }
+    students.forEach((s, i) => {
+        if (!s.name.toLowerCase().includes(search)) return;
 
-        function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            let y = 10;
+        if (s.status === "Present") present++;
+        else absent++;
 
-            doc.text('Attendance List', 10, y);
-            y += 10;
-            students.forEach(student => {
-                doc.text(`${student.rollNo} - ${student.name} - ${student.date} - ${student.status}`, 10, y);
-                y += 10;
-            });
+        table.innerHTML += `
+        <tr>
+            <td>${s.roll}</td>
+            <td>${s.name}</td>
+            <td>${s.date}</td>
+            <td><b>${s.status}</b></td>
+            <td>
+                <button class="${s.status === 'Present' ? 'absent' : 'present'}"
+                    onclick="toggle(${i})">
+                    Toggle
+                </button>
+                <button class="delete" onclick="deleteStudent(${i})">Delete</button>
+            </td>
+        </tr>`;
+    });
 
-            doc.save('attendance.pdf');
-        }
-    </script>
+    document.getElementById("presentCount").innerText = present;
+    document.getElementById("absentCount").innerText = absent;
+}
+
+function exportCSV() {
+    let csv = "Roll,Name,Date,Status\n";
+    students.forEach(s => {
+        csv += `${s.roll},${s.name},${s.date},${s.status}\n`;
+    });
+
+    let blob = new Blob([csv], { type: "text/csv" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "attendance.csv";
+    a.click();
+}
+
+render();
+</script>
 
 </body>
-<footer>Created and maintained by <a href="https://diptamandebnath.github.io/resume/">Diptaman</a></footer>
 </html>
